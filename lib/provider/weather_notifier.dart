@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -10,9 +11,10 @@ class WeatherNotifier extends StateNotifier<WeatherState> {
     fetchInitialWeatherData();
   }
 
-  static const String apiKey = '0494f5f4c0584c4c80d72047241208';
-  final String currentBaseUrl = 'http://api.weatherapi.com/v1/current.json';
-  final String forecastBaseUrl = 'http://api.weatherapi.com/v1/forecast.json';
+  final apiKey = dotenv.env['apiKey'];
+  final currentBaseUrl = dotenv.env['currentBaseUrl'];
+  final forecastBaseUrl = dotenv.env['forecastBaseUrl'];
+
 
   // Fetch initial weather data for the default location
   Future<void> fetchInitialWeatherData() async {
